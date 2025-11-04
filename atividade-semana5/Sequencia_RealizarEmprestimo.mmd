@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor Membro
+    participant TelaDeEmprestimo
+    participant Controlador
+    participant Livro
+    participant MembroObj as MembroInterno
+    participant Emprestimo
+
+    Membro ->> TelaDeEmprestimo: solicitarEmpréstimo(livro)
+    TelaDeEmprestimo ->> Controlador: validarDados(membro, livro)
+    Controlador ->> MembroObj: verificarPendencias()
+    MembroObj -->> Controlador: pendenciasOk
+    Controlador ->> Livro: verificarDisponibilidade()
+    Livro -->> Controlador: disponivel
+    Controlador ->> Emprestimo: registrarEmprestimo(membro, livro, data)
+    Emprestimo -->> Controlador: emprestimoRegistrado
+    Controlador ->> Livro: atualizarStatus("emprestado")
+    Controlador ->> TelaDeEmprestimo: exibirConfirmacao()
+    TelaDeEmprestimo -->> Membro: mensagem("Empréstimo realizado com sucesso")
