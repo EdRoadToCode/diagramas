@@ -1,0 +1,54 @@
+classDiagram
+    class Membro {
+        +String idMembro
+        +String nome
+        +String email
+        +verificarPendencias()
+        +listarEmprestimos()
+    }
+
+    class Livro {
+        +String isbn
+        +String titulo
+        +String autor
+        +boolean disponivel
+        +verificarDisponibilidade()
+        +atualizarStatus()
+    }
+
+    class Emprestimo {
+        +String idEmprestimo
+        +Date dataEmprestimo
+        +Date dataDevolucao
+        +calcularAtraso()
+    }
+
+    class Administrador {
+        +String idAdmin
+        +String nome
+        +String email
+        +cadastrarLivro()
+        +cadastrarMembro()
+        +gerarRelatorioPopularidade()
+    }
+
+    class Notificacao {
+        +String idNotificacao
+        +String mensagem
+        +enviarNotificacao()
+    }
+
+    class Sistema {
+        +login(usuario, senha)
+        +logout()
+        +gerarRelatorios()
+    }
+
+    %% RELACIONAMENTOS
+    Membro "1" --> "0..*" Emprestimo : realiza
+    Livro "1" --> "0..*" Emprestimo : está associado
+    Administrador "1" --> "0..*" Livro : gerencia
+    Administrador "1" --> "0..*" Membro : cadastra
+    Membro "1" --> "0..*" Notificacao : recebe
+    Sistema "1" --> "0..*" Membro : autentica
+    Sistema "1" --> "0..*" Administrador : autentica
