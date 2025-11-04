@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> EscolherItens
+    EscolherItens --> AdicionarAoCarrinho : Item selecionado
+    AdicionarAoCarrinho --> VerCarrinho : Carrinho atualizado
+    VerCarrinho --> ConfirmarPedido : Cliente confirma
+    ConfirmarPedido --> EfetuarPagamento : Pedido confirmado
+    EfetuarPagamento --> PagamentoAprovado : Pagamento OK
+    EfetuarPagamento --> PagamentoRecusado : Pagamento falhou
+    PagamentoAprovado --> PrepararPedido
+    PrepararPedido --> PedidoPronto
+    PedidoPronto --> EntregarPedido
+    EntregarPedido --> [*]
+    PagamentoRecusado --> CancelarPedido
+    CancelarPedido --> [*]
