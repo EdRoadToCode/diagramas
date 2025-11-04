@@ -1,0 +1,37 @@
+classDiagram
+    class Membro {
+        +String nome
+        +String idMembro
+        +String email
+        +verificarPendencias()
+        +listarEmprestimos()
+    }
+
+    class Livro {
+        +String titulo
+        +String autor
+        +String isbn
+        +boolean disponivel
+        +verificarDisponibilidade()
+        +atualizarStatus()
+    }
+
+    class Emprestimo {
+        +String idEmprestimo
+        +Date dataEmprestimo
+        +Date dataDevolucao
+        +calcularAtraso()
+    }
+
+    class Administrador {
+        +String nome
+        +String idAdmin
+        +cadastrarLivro()
+        +cadastrarMembro()
+        +gerarRelatorioPopularidade()
+    }
+
+    Membro "1" --> "0..*" Emprestimo : realiza
+    Livro "1" --> "0..*" Emprestimo : é associado
+    Administrador "1" --> "0..*" Livro : gerencia
+    Administrador "1" --> "0..*" Membro : cadastra
