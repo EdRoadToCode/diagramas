@@ -1,0 +1,14 @@
+stateDiagram-v2
+    title Diagrama de Estados — Ciclo de Vida do Livro
+
+    [*] --> Disponível
+
+    Disponível --> Emprestado : realizarEmpréstimo()
+    Emprestado --> Atrasado : prazoExpirou()
+    Emprestado --> Disponível : devolverLivro()
+    Atrasado --> Disponível : devolverLivro()
+    Atrasado --> Emprestado : renovarEmprestimo()
+
+    Disponível --> Reservado : reservarLivro()
+    Reservado --> Disponível : cancelarReserva()
+    Reservado --> Emprestado : realizarEmpréstimo()

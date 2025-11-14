@@ -1,0 +1,17 @@
+sequenceDiagram
+    title Diagrama de Sequência — Gerar Relatório de Popularidade
+
+    actor Administrador
+    participant TelaRelatorio
+    participant Controlador
+    participant Sistema
+    participant Livro
+
+    Administrador ->> TelaRelatorio: solicitarRelatorioPopularidade()
+    TelaRelatorio ->> Controlador: gerarRelatorio()
+    Controlador ->> Sistema: obterDadosEmprestimos()
+    Sistema -->> Controlador: listaDeEmprestimos
+    Controlador ->> Livro: calcularPopularidade(listaDeEmprestimos)
+    Livro -->> Controlador: rankingLivros
+    Controlador ->> TelaRelatorio: exibirRelatorio(rankingLivros)
+    TelaRelatorio -->> Administrador: relatórioGerado()
